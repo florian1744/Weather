@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import {
   checkLocationPermission,
   getCurrentLocation,
+  getUsersCurrentCoords,
 } from "@/services/locationService";
 import { UserLocationModel } from "@/types";
 import WeatherHeader from "@/components/weatherHeader";
@@ -15,8 +16,11 @@ export default function Index() {
   useEffect(() => {
     const fetchLocation = async () => {
       await checkLocationPermission();
+      getUsersCurrentCoords();
+      /*
       const location = await getCurrentLocation();
       setUserLocation(location);
+      */
     };
     fetchLocation();
   }, []);
@@ -29,6 +33,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
+      <Text className="text-red-400">test</Text>
       <WeatherHeader
         isTrackedView={true}
         currentLocation={userLocation}

@@ -10,6 +10,16 @@ export const checkLocationPermission = async () => {
   return false;
 };
 
+export const getUsersCurrentCoords = async () => {
+  const { coords } = await Location.getCurrentPositionAsync();
+  if (coords) {
+    const { latitude, longitude } = coords;
+    const usersCurrentCoords = latitude + ";" + longitude;
+    return usersCurrentCoords;
+  }
+  return null;
+};
+
 export const getCurrentLocation = async () => {
   //get current position lat and long
   const { coords } = await Location.getCurrentPositionAsync();
@@ -26,11 +36,12 @@ export const getCurrentLocation = async () => {
     });
 
     console.log(response);
-    //loop on the responce to get the actual result
+
     for (let item of response) {
       const userLocation: UserLocationModel = {
         city: item.city || "unknown city",
         country: item.country || "unknown city",
+        isoCountryCode: item.isoCountryCode || "unknown country code",
       };
       return userLocation;
     }

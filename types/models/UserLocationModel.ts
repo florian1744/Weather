@@ -1,8 +1,8 @@
 export type UserLocationModel = {
   city: string,
   country: string,
+  isoCountryCode: string,
   district?: string,
-  isoCountryCode?: string,
   name?: string,
   postalCode?: string,
   region?: string,
